@@ -1,4 +1,4 @@
-import { PostFormData } from "@/app/create-post/page";
+import { PostFormData } from "@/app/faculty/create-post/page";
 
 type Props = {
   formData: PostFormData;
