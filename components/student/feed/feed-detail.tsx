@@ -62,12 +62,10 @@ const FeedDetail: React.FC<FeedDetailProps> = ({
           </div>
         </div>
 
-        {/* Metadata Row */}
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-gray-500 mb-8">
           <div className="flex items-center gap-2">
             <UserCircle size={18} className="text-[#3b71ca]" />
             <span className="font-medium text-gray-700">{facultyName}</span>
-            <CheckCircle2 size={14} className="text-blue-500" />
           </div>
           <div className="flex items-center gap-2">
             <Calendar size={18} strokeWidth={1.5} />
@@ -75,19 +73,16 @@ const FeedDetail: React.FC<FeedDetailProps> = ({
           </div>
         </div>
 
-        {/* Primary Action: Apply Button */}
         <button
           onClick={onApply}
-          className="px-8 py-3 bg-[#3b71ca] hover:bg-[#2c56a0] text-white font-bold rounded-lg shadow-md shadow-blue-200 transition-all flex items-center gap-2 w-fit hover:scale-[1.01] active:scale-[0.98]"
+          className="px-8 py-3 bg-[#3b71ca] hover:bg-[#2c56a0] text-white font-bold rounded-lg shadow-md shadow-blue-200 transition-all flex items-center gap-2 w-fit cursor-pointer "
         >
           Apply Now
-          <ExternalLink size={16} />
         </button>
       </div>
 
       {/* 2. Body Section */}
       <div className="p-8 space-y-12">
-        {/* Description Section */}
         <section>
           <h3 className="text-lg font-bold text-gray-900 mb-4">Notice Overview</h3>
           <div className="text-gray-600 leading-relaxed text-[15px] space-y-4">
@@ -97,7 +92,6 @@ const FeedDetail: React.FC<FeedDetailProps> = ({
           </div>
         </section>
 
-        {/* Tags / Requirements Section */}
         {tags.length > 0 && (
           <section>
             <h3 className="text-lg font-bold text-gray-900 mb-4">Qualifications & Tags</h3>
@@ -114,7 +108,6 @@ const FeedDetail: React.FC<FeedDetailProps> = ({
           </section>
         )}
 
-        {/* Attachments Section */}
         {attachments && attachments.length > 0 && (
           <section className="pb-8">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Document Attachments</h3>

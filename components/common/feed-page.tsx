@@ -1,7 +1,7 @@
 "use client"
-import React, { useState } from 'react';
-import { Calendar, Clock, Tag } from 'lucide-react';
-import FeedDetail from '@/components/feed/feed-detail';
+import React, { useState, ReactNode } from 'react';
+import { Clock, Tag } from 'lucide-react';
+import FeedDetail from '@/components/student/feed/feed-detail';
 
 interface Attachment {
   type: 'image' | 'pdf' | 'file';
@@ -31,29 +31,29 @@ const SidebarCard = ({
 }) => (
   <div 
     onClick={onClick}
-    className={`p-5 cursor-pointer border-b transition-all duration-200 ${
+    className={`p-6 cursor-pointer border-b transition-all duration-200 ${
       isActive 
       ? 'bg-blue-50/50 border-l-4 border-l-[#3b71ca] border-b-gray-100' 
       : 'bg-white border-l-4 border-l-transparent hover:bg-gray-50/50 border-b-gray-100'
     }`}
   >
     {/* Title */}
-    <h3 className={`font-bold text-sm mb-2 line-clamp-2 leading-snug ${
+    <h3 className={`font-bold text-base mb-3 line-clamp-2 leading-snug ${
       isActive ? 'text-[#3b71ca]' : 'text-gray-900'
     }`}>
       {item.title}
     </h3>
     
     {/* Faculty Name */}
-    <p className="text-xs text-gray-600 font-medium mb-3">{item.facultyName}</p>
+    <p className="text-sm text-gray-600 font-medium mb-4">{item.facultyName}</p>
     
     {/* Tags - Show first 2 */}
     {item.tags.length > 0 && (
-      <div className="flex flex-wrap gap-1.5 mb-3">
+      <div className="flex flex-wrap gap-2 mb-4">
         {item.tags.slice(0, 2).map(tag => (
           <span 
             key={tag}
-            className={`px-2 py-0.5 text-[10px] font-semibold rounded-md ${
+            className={`px-3 py-1 text-xs font-semibold rounded-md ${
               isActive 
               ? 'bg-blue-100 text-[#3b71ca]' 
               : 'bg-gray-100 text-gray-600'
@@ -63,7 +63,7 @@ const SidebarCard = ({
           </span>
         ))}
         {item.tags.length > 2 && (
-          <span className="px-2 py-0.5 text-[10px] font-semibold rounded-md bg-gray-100 text-gray-500">
+          <span className="px-3 py-1 text-xs font-semibold rounded-md bg-gray-100 text-gray-500">
             +{item.tags.length - 2}
           </span>
         )}
@@ -71,14 +71,14 @@ const SidebarCard = ({
     )}
     
     {/* Bottom Meta Info */}
-    <div className="flex items-center justify-between text-[10px] text-gray-400">
-      <span className="flex items-center gap-1">
-        <Clock size={11} strokeWidth={2.5} />
+    <div className="flex items-center justify-between text-xs text-gray-400">
+      <span className="flex items-center gap-1.5">
+        <Clock size={14} strokeWidth={2.5} />
         {item.timestamp}
       </span>
       {item.attachments && item.attachments.length > 0 && (
-        <span className="flex items-center gap-1 text-gray-500">
-          <Tag size={11} />
+        <span className="flex items-center gap-1.5 text-gray-500">
+          <Tag size={14} />
           {item.attachments.length} attachment{item.attachments.length > 1 ? 's' : ''}
         </span>
       )}
@@ -86,7 +86,17 @@ const SidebarCard = ({
   </div>
 );
 
-const FeedPage = () => {
+interface FeedPageProps {
+  sideNavBar: ReactNode;
+  headerTitle?: string;
+  headerSubtitle?: string;
+}
+
+const FeedPage = ({ 
+  sideNavBar, 
+  headerTitle = "Faculty Feed",
+  headerSubtitle = "Latest updates from your professors"
+}: FeedPageProps) => {
   const [items] = useState<FeedItem[]>([
     {
       id: '1',
@@ -179,16 +189,17 @@ const FeedPage = () => {
 
   return (
     <div className="flex h-screen bg-[#f0f2f5] overflow-hidden">
+      {sideNavBar}
+      
       {/* Left Sidebar */}
-      <div className="w-[400px] flex flex-col bg-white border-r border-gray-200 overflow-hidden">
+      <div className="w-87.5 flex flex-col bg-white border-r border-gray-200 overflow-hidden ml-20">
         {/* Sidebar Header */}
         <div className="p-6 border-b border-gray-100 bg-white">
-          <h2 className="font-bold text-gray-900 text-xl mb-1">Faculty Feed</h2>
-          <p className="text-xs text-gray-500">Latest updates from your professors</p>
+          <h2 className="font-bold text-gray-900 text-2xl mb-1">{headerTitle}</h2>
+          <p className="text-sm text-gray-500">{headerSubtitle}</p>
         </div>
         
-        {/* Scrollable Feed List */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
           {items.map(item => (
             <SidebarCard 
               key={item.id} 
@@ -200,8 +211,7 @@ const FeedPage = () => {
         </div>
       </div>
 
-      {/* Right Content Area - Now the container is scrollable */}
-      <div className="flex-1 p-6 overflow-y-auto">
+      <div className="flex-1 p-6 overflow-y-auto custom-scrollbar">
         <FeedDetail {...activeItem} />
       </div>
     </div>
