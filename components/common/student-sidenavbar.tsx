@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, User, GraduationCap } from 'lucide-react'
 
-const SideNavBar = () => {
+const StudentSideNavBar = () => {
   const pathname = usePathname()
 
   const navItems = [
@@ -65,4 +65,4 @@ const SideNavBar = () => {
   )
 }
 
-export default SideNavBar
+export default StudentSideNavBar

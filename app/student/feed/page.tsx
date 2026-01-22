@@ -1,6 +1,6 @@
 "use client"
 import FeedPage from '@/components/common/feed-page';
-import SideNavBar from '@/components/common/sidenavbar';
+import SideNavBar from '@/components/common/student-sidenavbar';
 
 const StudentFeedPage = () => {
   return (
