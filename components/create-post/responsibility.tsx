@@ -8,34 +8,20 @@ type Props = {
 
 const ResponsibilityPage = ({ formData, setFormData }: Props) => {
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      {/* Header Section */}
-      <div className="flex items-start gap-4">
-        <div className="bg-blue-100 p-3 rounded-2xl text-blue-600">
-          <Layers size={28} />
-        </div>
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900">Student Responsibilities</h3>
-          <p className="text-gray-500 mt-1">
-            Define the specific tasks and expectations for the research assistant.
-          </p>
-        </div>
-      </div>
+    <div className="space-y-6 md:space-y-8 px-4 md:px-0">
+      <label className="block text-lg md:text-xl font-bold text-gray-900 uppercase md:tracking-widest mb-3">
+        Student Responsibilities
+      </label>
 
-      {/* Input Area */}
       <div className="relative group">
         <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 ml-1">
           Expectations & Deliverables
         </label>
         <textarea
           placeholder="Example:
-• Conduct weekly literature reviews
-• Maintain the project's Python codebase
-• Assist in drafting the final research paper"
-          className="w-full min-h-[300px] p-6 bg-gray-50 border-2 border-gray-100 rounded-[24px] 
-                     focus:bg-white focus:border-blue-200 focus:ring-4 focus:ring-blue-50 
-                     outline-none transition-all text-lg leading-relaxed text-gray-700 
-                     placeholder:text-gray-300 resize-none"
+          • Maintain the codebase
+          • Draft research paper"
+          className="w-full min-h-60 md:min-h-70 p-4 md:p-6 bg-gray-50 border-2 border-gray-400 rounded-xl md:rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-50 outline-none transition-all text-base md:text-lg leading-relaxed placeholder:text-gray-400 resize-none"
           value={formData.responsibilities}
           onChange={(e) =>
             setFormData({
@@ -44,12 +30,6 @@ const ResponsibilityPage = ({ formData, setFormData }: Props) => {
             })
           }
         />
-        
-        {/* Helper Tip */}
-        <div className="absolute bottom-4 right-6 flex items-center gap-2 text-gray-400 text-sm pointer-events-none opacity-0 group-focus-within:opacity-100 transition-opacity">
-          <CheckCircle2 size={14} className="text-green-500" />
-          <span>Bullet points work best for clarity</span>
-        </div>
       </div>
     </div>
   );
