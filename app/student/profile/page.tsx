@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import SideNavBar from '@/components/common/sidenavbar';
+import SideNavBar from '@/components/common/student-sidenavbar';
 import { LogOut, Briefcase } from 'lucide-react';
 import AppliedProjectsList from '@/components/student/profile/applied-projects';
 
