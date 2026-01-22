@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, User, GraduationCap, LayoutDashboard, PenSquare } from 'lucide-react'
+import { Home, User, GraduationCap, LayoutDashboard, PenSquare, LogOut } from 'lucide-react'
 
 const FacultySideNavBar = () => {
   const pathname = usePathname()
@@ -17,13 +17,13 @@ const FacultySideNavBar = () => {
       icon: LayoutDashboard,
       label: 'Dashboard',
       href: '/faculty/dashboard',
-      active: pathname === '/dashboard'
+      active: pathname === '/faculty/dashboard'
     },
     {
       icon: PenSquare,
       label: 'Create Post',
       href: '/faculty/create-post',
-      active: pathname === '/create-post'
+      active: pathname === '/faculty/create-post'
     },
     {
       icon: User,
@@ -32,6 +32,10 @@ const FacultySideNavBar = () => {
       active: pathname === '/faculty/profile'
     }
   ]
+
+  const handleLogout = () => {
+    console.log('Logging out...');
+  }
 
   return (
     <div className="w-20 h-screen bg-white border-r border-gray-200 flex flex-col items-center py-6 fixed left-0 top-0">
@@ -72,6 +76,19 @@ const FacultySideNavBar = () => {
           )
         })}
       </nav>
+
+      {/* Sign Out */}
+      <button
+        onClick={handleLogout}
+        className="relative w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-200 group text-gray-400 hover:bg-red-50 hover:text-red-600 mt-4"
+      >
+        <LogOut size={22} strokeWidth={2} />
+        
+        <div className="absolute left-full ml-4 px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all whitespace-nowrap z-50">
+          Sign Out
+          <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-gray-900" />
+        </div>
+      </button>
     </div>
   )
 }
