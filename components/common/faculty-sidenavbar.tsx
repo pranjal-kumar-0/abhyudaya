@@ -25,12 +25,6 @@ const FacultySideNavBar = () => {
       href: '/faculty/create-post',
       active: pathname === '/faculty/create-post'
     },
-    {
-      icon: User,
-      label: 'Profile',
-      href: '/faculty/profile',
-      active: pathname === '/faculty/profile'
-    }
   ]
 
   const handleLogout = () => {

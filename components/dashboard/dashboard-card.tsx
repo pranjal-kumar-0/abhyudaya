@@ -1,51 +1,73 @@
-import { 
-  Star, 
-  MoreVertical, 
-  FlaskConical 
-} from "lucide-react";
+"use client";
+import { MoreVertical, Users, Star, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
-const DashboardCardPage = () => {
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 border-2 border-slate-300 items-center py-4 sm:py-5 px-4 gap-2 sm:gap-6 md:gap-8 hover:bg-gray-200 transition-all duration-200 group cursor-pointer rounded-2xl mx-2 mb-2 hover:shadow-md md:border-none">
-        {/* Project Info */}
-        <div className="col-span-1 md:col-span-6 flex items-center gap-3 sm:gap-4">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-linear-to-br from-emerald-100 to-emerald-200 text-emerald-700 flex items-center justify-center shrink-0 shadow-sm border border-emerald-200/50">
-                <FlaskConical size={20} />
-            </div>
-            <h3 className="font-bold text-base sm:text-lg md:text-xl text-gray-900 group-hover:text-blue-900 transition-colors">Quantum Computing Simulation</h3>
-        </div>
-
-        {/* Applicants - Mobile: Inline | Desktop: Column */}
-        <div className="col-span-1 md:col-span-2 mt-2 sm:mt-3 md:mt-0">
-            <div className="flex items-center gap-2 md:flex-col md:items-start md:gap-0">
-            <span className="md:hidden text-xs sm:text-sm text-gray-600">Applicants:</span>
-            <span className="text-sm sm:text-base font-semibold text-gray-900">12 Students</span>
-            </div>
-        </div>
-
-        {/* Date - Desktop Only */}
-          <div className="hidden md:block col-span-2">
-            <span className="text-xs font-bold px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 uppercase tracking-wide shadow-sm">Active</span>
-          </div>
-
-        {/* Owner & Actions */}
-        <div className="col-span-1 md:col-span-2 flex items-center justify-between md:justify-end gap-4 sm:gap-6 mt-3 sm:mt-4 md:mt-0">
-            <div className="flex items-center gap-2 sm:gap-3">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-linear-to-br from-blue-500 to-blue-600 flex items-center justify-center text-xs text-white font-bold shadow-sm">AT</div>
-                <span className="text-xs sm:text-sm font-medium text-gray-900 whitespace-nowrap">Aris Thorne</span>
-            </div>
-            
-            <div className="flex items-center gap-1">
-                <button className="p-1.5 sm:p-2 hover:bg-amber-50 rounded-lg text-gray-500 hover:text-amber-500 transition-colors">
-                <Star size={16} />
-                </button>
-                <button className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg text-gray-500 hover:text-gray-700 transition-colors">
-                <MoreVertical size={16} />
-                </button>
-            </div>
-        </div>
-    </div>
-  )
+interface CardProps {
+  projectId: string;
+  title: string;
+  applicants: number;
+  status: "Active" | "Inactive";
+  owner: string;
+  ownerInitials: string;
 }
 
-export default DashboardCardPage
+const DashboardCardPage = ({ projectId, title, applicants, status, owner, ownerInitials }: CardProps) => {
+  const isActive = status === "Active";
+
+  return (
+    <Link href={`/faculty/dashboard/${projectId}`}>
+      <div
+        className="group flex items-center justify-between p-7 cursor-pointer hover:bg-[#3b71ca]/[0.02] transition-all 
+                   border-b border-gray-100 last:border-0 border-l-4 border-l-transparent hover:border-l-[#3b71ca]"
+      >
+        <div className="flex-1 grid grid-cols-3 items-center gap-8">
+          <div>
+            <h3 className="font-semibold text-gray-900 text-lg group-hover:text-[#3b71ca] transition-colors">
+              {title}
+            </h3>
+          </div>
+
+          <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
+            <Users size={16} className="text-gray-300" />
+            {applicants} Students Applied
+          </div>
+
+          <div className="flex items-center justify-end gap-10">
+            <span
+              className={`px-3 py-1 text-[11px] font-semibold uppercase tracking-wider rounded-md border ${
+                isActive
+                  ? "bg-blue-50 text-[#3b71ca] border-blue-100"
+                  : "bg-gray-50 text-gray-500 border-gray-100"
+              }`}
+            >
+              {status}
+            </span>
+
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center text-[10px] text-gray-600 font-bold">
+                {ownerInitials}
+              </div>
+              <span className="text-sm font-medium text-gray-600">{owner}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="ml-10 flex items-center gap-3">
+          <button 
+            onClick={(e) => e.preventDefault()}
+            className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+          >
+            <MoreVertical size={18} />
+          </button>
+
+          <ChevronRight
+            size={18}
+            className="text-gray-300 group-hover:text-[#3b71ca] transition-all transform group-hover:translate-x-1"
+          />
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default DashboardCardPage;
