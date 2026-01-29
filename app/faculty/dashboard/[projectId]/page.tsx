@@ -4,7 +4,7 @@ import { use } from "react";
 import FacultySideNavBar from "@/components/common/faculty-sidenavbar";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import ApplicantsList from "@/components/dashboard/applicants-list";
+import ApplicantsList from "@/components/faculty/dashboard/applicants-list";
 
 interface Student {
   id: string;
@@ -67,7 +67,7 @@ export default function ProjectApplicantsPage({
         </div>
 
         {/* Applicants List */}
-        <ApplicantsList applicants={applicants} />
+        <ApplicantsList applicants={applicants} projectId={projectId} />
       </div>
     </div>
   );
